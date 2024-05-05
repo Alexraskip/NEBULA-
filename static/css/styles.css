@@ -1,0 +1,34 @@
+/* styles.css */
+
+body {
+    margin: 0.5in auto; /* Position 0.5 inch from top margin and center horizontally */
+    background-color: #ffffff; /* Set page background color to white */
+}
+
+form {
+    width: calc(100% - 1in); /* Set form width to cover the width of the page with a margin of half an inch from left and right */
+    margin: auto; /* Center form horizontally */
+    padding: 20px;
+    background-color: #f0f0f0; /* Set form background color to light grey */
+    border-radius: 10px;
+    display: flex; /* Use flexbox layout */
+    align-items: center; /* Align items vertically in the center */
+}
+
+select {
+    width: calc(80% - 35px); /* Set select element width to 50% of the form width minus padding */
+    padding: 5px; /* Add padding for better appearance */
+    background-color: #ffffff; /* Set select element background color to white */
+    border: 2px solid #cccccc; /* Add border for better visibility */
+    border-radius: 15px; /* Add border radius for rounded corners */
+    margin-bottom: 10px; /* Add margin bottom for spacing between select elements */
+    text-align-last: center; /* Align the text in the select element to the middle */
+}
+
+select:hover {
+    border-color: blue; /* Change border color to blue when hovering over the select element */
+}
+
+h1 {
+    text-align: center; /* Center the heading */
+}

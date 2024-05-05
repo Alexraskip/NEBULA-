@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <link rel="icon" href="data:,"> <!-- Disable favicon request -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .navigation {
+            position: fixed;
+            left: 2in;
+            top: 20px; /* Adjust top position for desired distance from the top */
+            display: flex;
+            align-items: center;
+        }
+        .rocket-icon {
+            font-size: 24px;
+            margin-right: 5px;
+        }
+        .nebula-dock-link {
+            text-decoration: none;
+            color: blue;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation to go back to index.html -->
+    <div class="navigation">
+        <a href="http://127.0.0.1:5000" class="nebula-dock-link">
+            <span class="rocket-icon">&#128640;</span> Nebula - dock
+        </a>
+    </div>
+
+    <div class="container">
+        <h1>Student Dashboard</h1>
+        <form>
+            <select class="js-example-basic-single" name="names" id="names">
+                <option value="">--- Select/search a student ---</option>
+                <!-- Options for students will be dynamically added here -->
+            </select>
+            <select class="js-example-basic-single" name="cohorts" id="cohorts">
+                <option value="">--- Search/select a cohort ---</option>
+                <!-- Options for cohorts will be dynamically added here -->
+            </select>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
