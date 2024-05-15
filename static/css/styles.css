@@ -35,13 +35,13 @@ h1 {
     text-align: center; /* Center the heading */
 }
 
-/* Additional styling for attendance_average, assignment_completion, and total_students */
+/* Additional styling for attendance_average, assignment_completion, cohort, ranking, and total_students */
 .additional-element {
     margin-top: 20px; /* Add margin to separate from the form */
     padding: 30px; /* Add padding for better appearance */
     border-radius: 10px; /* Add border radius for rounded corners */
-    width: calc(33.33% - 20px); /* Set width to one-third minus margin */
-    max-width: 400px; /* Set max-width to limit the width */
+    width: calc(25% - 20px); /* Set width to one-fourth minus margin */
+    max-width: 250px; /* Set max-width to limit the width */
     background-color: #ffffff; /* Set background color to white */
     border: 2px solid #cccccc; /* Add border for better visibility */
     box-sizing: border-box; /* Include padding and border in the element's total width */

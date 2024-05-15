@@ -49,20 +49,23 @@ def get_students():
         return jsonify({'error': str(e)}), 500
 
 @app.route('/api/student/<email>', methods=['GET'])
-def get_student_details(email):
+def get_student_info(email):
     try:
         with get_db_connection() as conn:
             with conn.cursor() as cur:
-                cur.execute("SELECT attendance_average, assignment_completion FROM Student_Details WHERE email=%s", (email,))
-                student_details = cur.fetchone()
+                # Fetch student details including cohort and ranking
+                cur.execute("SELECT attendance_average, assignment_completion, cohort_name, ranking FROM Student_Details WHERE email=%s", (email,))
+                student_info = cur.fetchone()
                 
-                if student_details:
-                    attendance_average, assignment_completion = student_details
-                    return jsonify({'attendanceAverage': attendance_average, 'assignmentCompletion': assignment_completion})
+                if student_info:
+                    attendance_average, assignment_completion, cohort_name, ranking = student_info
+                    return jsonify({'attendanceAverage': attendance_average, 'assignmentCompletion': assignment_completion, 'cohort': cohort_name, 'ranking': ranking})
                 else:
-                    return jsonify({'error': 'Student not found'}), 404
+                    return jsonify({'error': 'Student info not found'}), 404
     except pymysql.MySQLError as e:
         return jsonify({'error': str(e)}), 500
+
+
 
 @app.route('/api/test-db-connection', methods=['POST'])
 def test_db_connection():
