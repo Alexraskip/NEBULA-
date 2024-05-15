@@ -13,7 +13,7 @@
         }
         .container {
             max-width: 1000px;
-            margin: auto; /* Center the container horizontally */
+            margin: 0.5in auto 0; /* Add margin of 0.5 inches from the top of the page */
             padding: 20px;
             background-color: #f0f0f0; /* Set the container background color to light grey */
             border-radius: 10px;
@@ -23,6 +23,8 @@
             display: flex; /* Use flexbox layout */
             flex-direction: column; /* Stack elements vertically */
             justify-content: space-between; /* Push elements to the top and bottom */
+            border: 2px solid #cccccc; /* Add border */
+            border-top: 0; /* Remove top border */
         }
         h1, p {
             text-align: center;
@@ -56,15 +58,20 @@
             margin-top: auto; /* Push copyright to the bottom */
             margin-bottom: 0.5in; /* Set the bottom margin to half an inch */
         }
+        .dashboard-links {
+            margin-top: 0.5in; /* Set top margin for the links */
+            margin-left: 0.5in; /* Set left margin for the links */
+            margin-right: 0.5in; /* Set right margin for the links */
+            display: flex; /* Use flexbox layout */
+            justify-content: space-between; /* Space the links evenly */
+        }
         .dashboard-link {
-            margin-bottom: 20px; /* Add space below the link */
             font-size: 16px; /* Increase font size for the link */
             text-decoration: none; /* Remove underline from the link */
             color: blue; /* Set link color to blue */
             font-weight: bold; /* Make link text bold */
             display: flex; /* Use flexbox layout */
             align-items: center; /* Center vertically */
-            justify-content: center; /* Center horizontally */
         }
         .clock-icon {
             margin-right: 5px; /* Add space between clock icon and text */
@@ -73,11 +80,18 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="dashboard-links">
+        <!-- Add link to config.html -->
+        <a href="{{ url_for('config') }}" class="dashboard-link">
+            <span class="settings-icon">&#9881;</span> Configurations
+        </a>
+        
         <a href="{{ url_for('student_dashboard') }}" class="dashboard-link">
             <span class="clock-icon">&#128339;</span> Student Dashboard
         </a>
-        
+    </div>
+
+    <div class="container">
         <h1>Azubi Africa: Project Nebula</h1>
         <p><strong>Objective:</strong> A centralized, interactive platform that will serve as the nerve center for all Azubi Africa's operational, educational, and community engagement needs.</p>
         <div class="images-container">

@@ -5,23 +5,25 @@ body {
     background-color: #ffffff; /* Set page background color to white */
 }
 
-form {
-    width: calc(100% - 1in); /* Set form width to cover the width of the page with a margin of half an inch from left and right */
-    margin: auto; /* Center form horizontally */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
     padding: 20px;
     background-color: #f0f0f0; /* Set form background color to light grey */
-    border-radius: 10px;
+}
+
+.select-container {
     display: flex; /* Use flexbox layout */
-    align-items: center; /* Align items vertically in the center */
+    justify-content: space-between; /* Align select elements on the left and right */
+    margin-bottom: 10px; /* Add margin bottom for spacing between select elements */
 }
 
 select {
-    width: calc(80% - 35px); /* Set select element width to 50% of the form width minus padding */
+    width: calc(48% - 5px); /* Set select element width to 48% of the container width minus padding */
     padding: 5px; /* Add padding for better appearance */
     background-color: #ffffff; /* Set select element background color to white */
     border: 2px solid #cccccc; /* Add border for better visibility */
     border-radius: 15px; /* Add border radius for rounded corners */
-    margin-bottom: 10px; /* Add margin bottom for spacing between select elements */
     text-align-last: center; /* Align the text in the select element to the middle */
 }
 
@@ -31,4 +33,51 @@ select:hover {
 
 h1 {
     text-align: center; /* Center the heading */
+}
+
+/* Additional styling for attendance_average, assignment_completion, and total_students */
+.additional-element {
+    margin-top: 20px; /* Add margin to separate from the form */
+    padding: 30px; /* Add padding for better appearance */
+    border-radius: 10px; /* Add border radius for rounded corners */
+    width: calc(33.33% - 20px); /* Set width to one-third minus margin */
+    max-width: 400px; /* Set max-width to limit the width */
+    background-color: #ffffff; /* Set background color to white */
+    border: 2px solid #cccccc; /* Add border for better visibility */
+    box-sizing: border-box; /* Include padding and border in the element's total width */
+    display: flex; /* Use flexbox layout */
+    flex-direction: column; /* Stack content vertically */
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+}
+
+.additional-elements {
+    display: flex; /* Use flexbox layout */
+    justify-content: space-between; /* Align elements with space between */
+    margin-top: 0.2in; /* Add margin to separate from the form */
+    position: relative; /* Position relative to allow absolute positioning of pseudo-elements */
+}
+
+/* Insert lines above and below the additional elements */
+.additional-elements::before,
+.additional-elements::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: rgba(0, 0, 0, 0.3); /* Faded black color */
+}
+
+.additional-elements::before {
+    top: -0.05in; /* Position 0.2 inches above the additional elements */
+}
+
+.additional-elements::after {
+    bottom: -0.1in; /* Position 0.2 inches below the additional elements */
+}
+
+.element-name {
+    color: rgba(0, 0, 0, 0.3); /* Faded black color */
+    font-size: 12px; /* Font size 12 */
 }

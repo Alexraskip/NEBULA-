@@ -1,4 +1,4 @@
-#!/home/josphat/Desktop/NEBULA/myenv/bin/python3
+#!/home/josphat/Desktop/Nebula/myenv/bin/python3.11
 # -*- coding: utf-8 -*-
 import re
 import sys
