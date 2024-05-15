@@ -49,6 +49,13 @@ h1 {
     flex-direction: column; /* Stack content vertically */
     align-items: center; /* Center items horizontally */
     justify-content: center; /* Center items vertically */
+    position: relative; /* Position relative for absolute positioning of icon */
+}
+
+/* Styling for icons */
+.additional-element .icon {
+    font-size: 24px; /* Set font size for icon */
+    margin-bottom: 10px; /* Add margin below the icon */
 }
 
 .additional-elements {

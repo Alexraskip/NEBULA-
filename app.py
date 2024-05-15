@@ -79,5 +79,27 @@ def test_db_connection():
     except pymysql.MySQLError as e:
         return jsonify({'error': str(e)}), 500
 
+# Endpoint to retrieve cohort statistics by cohort_name
+@app.route('/api/cohort/stats/<cohort_name>', methods=['GET'])
+def get_cohort_stats(cohort_name):
+    try:
+        with get_db_connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute("SELECT total_students, average_attendance, average_assignment_completion FROM Cohort_Stats WHERE cohort_name=%s", (cohort_name,))
+                cohort_stats = cur.fetchone()
+                
+                if cohort_stats:
+                    total_students, average_attendance, average_assignment_completion = cohort_stats
+                    return jsonify({
+                        'cohort_name': cohort_name,
+                        'total_students': total_students,
+                        'average_attendance': average_attendance,
+                        'average_assignment_completion': average_assignment_completion
+                    })
+                else:
+                    return jsonify({'error': 'Cohort stats not found'}), 404
+    except pymysql.MySQLError as e:
+        return jsonify({'error': str(e)}), 500
+
 if __name__ == '__main__':
     app.run(debug=True)
