@@ -1,13 +1,13 @@
 $(document).ready(function() {
     $('.js-example-basic-single').select2();
-    
+
     // Function to update additional elements with N/A
     function updateAdditionalElements() {
-        $('#attendance_average').html('<span class="icon">&#128100;</span><span class="element-name">N/A</span>');
-        $('#assignment_completion').html('<span class="icon">&#128220;</span><span class="element-name">N/A</span>');
-        $('#cohort').html('<span class="icon">&#128101;</span><span class="element-name">N/A</span>');
-        $('#ranking').html('<span class="icon">&#127942;</span><span class="element-name">N/A</span>');
-        $('#total_students').html('<span class="icon">&#128101;&#128102;</span><span class="element-name">N/A</span>');
+        $('#attendance_average .element-value').text('N/A');
+        $('#assignment_completion .element-value').text('N/A');
+        $('#cohort .element-value').text('N/A');
+        $('#ranking .element-value').text('N/A');
+        $('#total_students .element-value').text('N/A');
     }
 
     // Initialize default select options and additional elements
@@ -22,9 +22,9 @@ $(document).ready(function() {
                 const averageAttendance = data.average_attendance;
                 const averageAssignmentCompletion = data.average_assignment_completion;
                 
-                $('#total_students').html(`<span class="icon">&#128101;&#128102;</span><span style="font-weight: bold;">Total Students: ${totalStudents}</span>`);
-                $('#attendance_average').html(`<span class="icon">&#128100;</span><span style="font-weight: bold; color: green;">Attendance Average (avg): ${averageAttendance}</span>`);
-                $('#assignment_completion').html(`<span class="icon">&#128220;</span><span style="font-weight: bold; color: red;">Assignment Completion (avg): ${averageAssignmentCompletion}</span>`);
+                $('#total_students .element-value').text(totalStudents);
+                $('#attendance_average .element-value').text(averageAttendance);
+                $('#assignment_completion .element-value').text(averageAssignmentCompletion);
             })
             .catch(error => console.error(error));
     }
@@ -70,22 +70,60 @@ $(document).ready(function() {
                 .then(data => {
                     // Display attendance average
                     const attendanceAverage = parseFloat(data.attendanceAverage).toFixed(2);
-                    $('#attendance_average').html(`<span class="icon">&#128100;</span><span style="font-weight: bold; color: green;">Attendance Average (avg): ${attendanceAverage}</span>`);
+                    $('#attendance_average .element-value').text(attendanceAverage);
                     
                     // Display assignment completion
                     const assignmentCompletion = parseFloat(data.assignmentCompletion).toFixed(2);
-                    $('#assignment_completion').html(`<span class="icon">&#128220;</span><span style="font-weight: bold; color: red;">Assignment Completion (avg): ${assignmentCompletion}</span>`);
+                    $('#assignment_completion .element-value').text(assignmentCompletion);
 
                     // Display cohort and ranking
                     const cohort = data.cohort;
                     const ranking = data.ranking;
-                    $('#cohort').html(`<span class="icon">&#128101;</span><span style="font-weight: bold;">Cohort: ${cohort}</span>`);
-                    $('#ranking').html(`<span class="icon">&#127942;</span><span style="font-weight: bold;">Ranking: ${ranking}</span>`);
+                    $('#cohort .element-value').text(cohort);
+                    $('#ranking .element-value').text(ranking);
                 })
                 .catch(error => console.error(error));
         } else if (selectedCohort) {
             // If only a cohort is selected, fetch and display cohort statistics
             fetchCohortStats(selectedCohort);
+            
+            // Fetch and display the bar chart
+            fetchAndDisplayChart(selectedCohort);
         }
     });
+    
+    // Function to fetch and display the bar chart
+    function fetchAndDisplayChart(cohortName) {
+        fetch(`/api/cohort/attendance/${cohortName}`)
+            .then(response => response.json())
+            .then(data => {
+                const attendanceData = data.attendance_data;
+                const weeks = attendanceData.map(item => item.week);
+                const attendanceValues = attendanceData.map(item => item.average_attendance);
+
+                // Create the bar chart
+                const ctx = document.getElementById('cohort-performance-chart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: weeks,
+                        datasets: [{
+                            label: 'Average Attendance',
+                            data: attendanceValues,
+                            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => console.error(error));
+    }
 });

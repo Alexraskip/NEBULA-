@@ -6,30 +6,27 @@
     <title>Student Dashboard</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
-    <link rel="icon" href="data:,"> <!-- Disable favicon request -->
+    <link rel="icon" href="data:,">
     <style>
         .dashboard-links {
-            margin-top: 0.2in; /* Adjust top margin to 0.2 inches */
-            display: flex; /* Use flexbox layout */
-            justify-content: space-between; /* Align items with space between */
-            padding-left: 0.6in; /* Add padding to the left */
-            padding-right: 0.6in; /* Add padding to the right */
+            margin-top: 0.2in;
+            display: flex;
+            justify-content: space-between;
+            padding-left: 0.6in;
+            padding-right: 0.6in;
         }
         .dashboard-links a {
-            text-decoration: none; /* Remove underline from links */
-            color: blue; /* Set link color to blue */
-            font-weight: bold; /* Make the text bold */
+            text-decoration: none;
+            color: blue;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <!-- Dashboard links -->
     <div class="dashboard-links">
-        <!-- Add link to index.html -->
         <a href="http://127.0.0.1:5000" class="nebula-dock-link">
             <span class="rocket-icon">&#128640;</span> Nebula - dock
         </a>
-        <!-- Add link to config.html -->
         <a href="{{ url_for('config') }}" class="dashboard-link">
             <span class="settings-icon">&#9881;</span> Configurations
         </a>
@@ -41,49 +38,47 @@
             <div class="select-container">
                 <select class="js-example-basic-single" name="names" id="names">
                     <option value="">--- Select/search a student ---</option>
-                    <!-- Options for students will be dynamically added here -->
                 </select>
                 <select class="js-example-basic-single" name="cohorts" id="cohorts">
                     <option value="">--- Search/select a cohort ---</option>
-                    <!-- Options for cohorts will be dynamically added here -->
                 </select>
             </div>
     
-            <!-- Additional elements -->
-    <div class="additional-elements">
-        <!-- Element 1: Attendance Average -->
-        <div id="attendance_average" class="additional-element">
-            <span class="icon">&#128100;</span> <!-- Icon for attendance average -->
-            <span class="element-name">Attendance Average (avg)</span><br>
-            <!-- Content for element 1 -->
-        </div>
-        <!-- Element 2: Assignment Completion -->
-        <div id="assignment_completion" class="additional-element">
-            <span class="icon">&#128221;</span> <!-- Icon for assignment completion -->
-            <span class="element-name">Assignment Completion (avg)</span><br>
-            <!-- Content for element 2 -->
-        </div>
-        <!-- Element 3: Cohort -->
-        <div id="cohort" class="additional-element">
-            <span class="icon">&#128101;</span> <!-- Icon for cohort -->
-            <span class="element-name">Cohort</span><br>
-            <!-- Content for element 3 -->
-        </div>
-        <!-- Element 4: Ranking -->
-        <div id="ranking" class="additional-element">
-            <span class="icon">&#127942;</span> <!-- Icon for ranking -->
-            <span class="element-name">Ranking</span><br>
-            <!-- Content for element 4 -->
-        </div>
-        <!-- Element 5: Total Students -->
-        <div id="total_students" class="additional-element">
-            <span class="icon">&#128101;&#128101;</span> <!-- Icon for total students -->
-            <span class="element-name">Total Students</span><br>
-            <!-- Content for element 5 -->
-        </div>
-    </div>
+            <div class="additional-elements">
+                <div id="attendance_average" class="additional-element">
+                    <span class="icon">&#128100;</span>
+                    <span class="element-name">Attendance Average (avg)</span>
+                    <span class="element-value">N/A</span>
+                </div>
+                <div id="assignment_completion" class="additional-element">
+                    <span class="icon">&#128221;</span>
+                    <span class="element-name">Assignment Completion (avg)</span>
+                    <span class="element-value">N/A</span>
+                </div>
+                <div id="cohort" class="additional-element">
+                    <span class="icon">&#128101;</span>
+                    <span class="element-name">Cohort</span>
+                    <span class="element-value">N/A</span>
+                </div>
+                <div id="ranking" class="additional-element">
+                    <span class="icon">&#127942;</span>
+                    <span class="element-name">Ranking</span>
+                    <span class="element-value">N/A</span>
+                </div>
+                <div id="total_students" class="additional-element">
+                    <span class="icon">&#128101;&#128101;</span>
+                    <span class="element-name">Total Students</span>
+                    <span class="element-value">N/A</span>
+                </div>
+            </div>
+        
+            <div id="cohort-performance-graph" class="chart-container" style="width: 50%;">
+                <canvas id="cohort-performance-chart" width="700" height="200"></canvas>
+            </div>
+        </form>
 
-    
+            
+    </div>
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>

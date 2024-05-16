@@ -103,6 +103,23 @@ def get_cohort_stats(cohort_name):
                     return jsonify({'error': 'Cohort stats not found'}), 404
     except pymysql.MySQLError as e:
         return jsonify({'error': str(e)}), 500
+    
+# Endpoint to retrieve average attendance per week for a selected cohort
+@app.route('/api/cohort/attendance/<cohort_name>', methods=['GET'])
+def get_cohort_attendance(cohort_name):
+    try:
+        with get_db_connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute("SELECT week, average_attendance FROM Cohort_Stats WHERE cohort_name=%s", (cohort_name,))
+                attendance_data = cur.fetchall()
+                
+                if attendance_data:
+                    return jsonify({'attendance_data': attendance_data})
+                else:
+                    return jsonify({'error': 'Attendance data not found'}), 404
+    except pymysql.MySQLError as e:
+        return jsonify({'error': str(e)}), 500
+
 
 if __name__ == '__main__':
     app.run(debug=True)
